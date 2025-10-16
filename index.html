@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Globe Demo</title>
+    <link rel="stylesheet" href="globe.css">
+  </head>
+  <body>
+    <main class="page">
+          <div class="globe">
+            <canvas id="globe-canvas" width="674" height="674"></canvas>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="./vendor/globekit-public/globekit.umd.js"></script>
+
+    <script type="module">
+      import { createGlobe } from './globe.js';
+
+      const canvas = document.getElementById('globe-canvas');
+      const kit = window.globekitjs || window.GlobeKit;
+
+      createGlobe(canvas, {
+        hasDots: true,
+        kit,
+        pointDataPath: './assets/pointglobe.bin',
+        noiseTexture: './assets/clouds.png',
+        atmosphereTexture: './assets/disk-glow-border.png',
+        wasmPath: './assets/gkweb_bg.wasm'
+      }).catch((error) => {
+        console.error('Failed to initialise globe', error);
+      });
+    </script>
+  </body>
+</html>
